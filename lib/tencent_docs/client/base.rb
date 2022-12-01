@@ -43,10 +43,6 @@ module TencentDocs
 
       private
 
-      def access_token_name
-        'access_token'
-      end
-
       def init_attrs(*keys)
         keys.each do |key|
           value = options[key]
@@ -62,13 +58,19 @@ module TencentDocs
 
       def with_token(headers, tries = 2)
         params = headers[:params] || {}
-        token_name = headers.delete(:token_name) || access_token_name
-        params[token_name] = access_token
         headers[:params] = params
-        yield headers
+        yield default_headers.merge(headers)
       rescue TencentDocs::AccessTokenExpiredError
         token_store.fetch_token
         retry unless (tries -= 1).zero?
+      end
+
+      def default_headers
+        {
+          access_token: access_token,
+          client_id: client_id,
+          open_id: open_id
+        }
       end
 
       class << self
