@@ -5,11 +5,12 @@ module TencentDocs
     class App < Base
       api_mount :oauth
 
-      attr_reader :client_id, :client_secret, :user_id, :nick_name, :avatar
+      attr_reader :client_id, :client_secret, :user_id, :nick_name, :avatar, :open_id
 
       def initialize(options = {})
         super
         init_attrs :client_id, :client_secret, :user_id, :nick_name, :avatar
+        @open_id = options[:open_id] || open_id_store.token
       end
 
       def access_token
@@ -20,6 +21,10 @@ module TencentDocs
 
       def token_store
         @token_store ||= TencentDocs::Tokens::AppToken.new(self)
+      end
+
+      def open_id_store
+        @open_id_store ||= TencentDocs::Tokens::OpenId.new(self)
       end
     end
   end
