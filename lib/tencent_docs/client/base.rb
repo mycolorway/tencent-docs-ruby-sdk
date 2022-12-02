@@ -19,6 +19,12 @@ module TencentDocs
         end
       end
 
+      def delete(path, headers = {})
+        with_token(headers) do |headers_with_token|
+          request.delete path, headers_with_token
+        end
+      end
+
       def post(path, payload = {}, headers = {})
         with_token(headers) do |headers_with_token|
           request.post path, payload, headers_with_token

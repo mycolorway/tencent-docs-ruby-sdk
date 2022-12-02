@@ -17,7 +17,13 @@ module TencentDocs
         http.headers(header).get(url, params: params, ssl_context: ssl_context)
       end
     end
-    alias delete get
+
+    def delete(path, delete_header = {})
+      request(path, delete_header) do |url, header|
+        params = header.delete(:params)
+        http.headers(header).delete(url, params: params, ssl_context: ssl_context)
+      end
+    end
 
     def post(path, post_body, post_header = {})
       request(path, post_header) do |url, header|
@@ -27,11 +33,11 @@ module TencentDocs
       end
     end
 
-    def put(path, put_body, put_header = {})
-      request(path, put_header) do |url, header|
-        TencentDocs.logger.info "payload: #{put_body}"
+    def patch(path, patch_body, patch_header = {})
+      request(path, patch_header) do |url, header|
+        TencentDocs.logger.info "payload: #{patch_body}"
         params = header.delete(:params)
-        http.headers(header).put(url, params: params, json: put_body, ssl_context: ssl_context)
+        http.headers(header).patch(url, params: params, json: patch_body, ssl_context: ssl_context)
       end
     end
 
