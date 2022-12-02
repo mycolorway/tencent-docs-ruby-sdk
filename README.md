@@ -5,7 +5,7 @@
 添加下面代码到应用的 Gemfile:
 
 ```ruby
-gem 'tencent-docs-sdk', github: 'mycolorway/tencent-docs-ruby-sdk', branch: 'master'
+gem 'tencent-docs-sdk', github: 'mycolorway/tencent-docs-ruby-sdk', branch: 'main'
 ```
 
 然后执行:
