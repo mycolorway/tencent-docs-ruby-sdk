@@ -4,6 +4,9 @@ module TencentDocs
   module Client
     class App < Base
       api_mount :oauth
+      api_mount :file
+      api_mount :folder
+      api_mount :permission
 
       attr_reader :client_id, :client_secret, :user_id, :nick_name, :avatar, :open_id
 
