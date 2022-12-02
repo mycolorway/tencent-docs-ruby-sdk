@@ -1,4 +1,4 @@
-> Ruby SDKs for TencentDocs(腾讯文档) API https://open.tencent_docs.com/
+> Ruby SDKs for [TencentDocs(腾讯文档) API](https://docs.qq.com/open/document/app/)
 
 ## 安装
 
