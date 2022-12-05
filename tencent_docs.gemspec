@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'TencentDocs(腾讯文档) API SDKs for Ruby'
   spec.description   = 'TencentDocs(腾讯文档) API SDKs for Ruby https://docs.qq.com/open/document/app/'
-  spec.homepage      = 'https://github.com/seandong/dintalk'
+  spec.homepage      = 'https://github.com/mycolorway/tencent-docs-ruby-sdk'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
 
