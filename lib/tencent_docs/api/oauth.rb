@@ -1,4 +1,4 @@
-module TencentDocs
+module TencentDocsSdk
   module Api
     module Oauth
       # https://docs.qq.com/pdf/DZnl2dmFRbWJMVWdD?

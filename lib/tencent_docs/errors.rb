@@ -1,4 +1,4 @@
-module TencentDocs
+module TencentDocsSdk
   # Exceptions
   class RedisNotConfigException < RuntimeError; end
   class MissingParameterException < RuntimeError; end

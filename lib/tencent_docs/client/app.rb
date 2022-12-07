@@ -1,6 +1,6 @@
 require 'tencent_docs/client/base'
 
-module TencentDocs
+module TencentDocsSdk
   module Client
     class App < Base
       api_mount :oauth
@@ -12,7 +12,9 @@ module TencentDocs
 
       def initialize(options = {})
         super
-        init_attrs :client_id, :client_secret, :user_id, :nick_name, :avatar
+        init_attrs :user_id, :nick_name, :avatar
+        @client_id = options[:client_id] || TencentDocsSdk.config.default_client_id
+        @client_secret = options[:client_secret] || TencentDocsSdk.config.default_client_secret
         @open_id = options[:open_id] || open_id_store.token
       end
 
@@ -23,11 +25,11 @@ module TencentDocs
       private
 
       def token_store
-        @token_store ||= TencentDocs::Tokens::AppToken.new(self)
+        @token_store ||= TencentDocsSdk::Tokens::AppToken.new(self)
       end
 
       def open_id_store
-        @open_id_store ||= TencentDocs::Tokens::OpenId.new(self)
+        @open_id_store ||= TencentDocsSdk::Tokens::OpenId.new(self)
       end
     end
   end

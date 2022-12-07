@@ -1,6 +1,6 @@
 require 'tencent_docs/tokens/base'
 
-module TencentDocs
+module TencentDocsSdk
   module Tokens
     class AppToken < Base
       def redis_key

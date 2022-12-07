@@ -20,7 +20,7 @@ $ bundle install
 
 ```ruby
 # config/initializers/tencent_docs.rb
-TencentDocs.configure do |config|
+TencentDocsSdk.configure do |config|
   config.redis = Redis.new
   config.default_client_id     = 'xxx' # 应用 client ID
   config.default_client_secret = 'xxx' # 应用 client secret
@@ -30,7 +30,7 @@ end
 ### 实例化应用
 
 ```ruby
-user_client = TencentDocs::Client::App.new(
+user_client = TencentDocsSdk::Client::App.new(
   client_id: 'client_id',
   client_secret: 'client_secret',
   user_id: 'user_id',

@@ -1,4 +1,4 @@
-module TencentDocs
+module TencentDocsSdk
   module Api
     module File
       # https://docs.qq.com/open/document/app/openapi/v2/file/files/create.html

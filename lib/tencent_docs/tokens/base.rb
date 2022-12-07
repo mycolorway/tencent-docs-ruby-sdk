@@ -1,4 +1,4 @@
-module TencentDocs
+module TencentDocsSdk
   module Tokens
     class Base
       attr_accessor :client
@@ -21,7 +21,7 @@ module TencentDocs
         data = fetch_token.data
         value = data[key]
         if value.nil?
-          TencentDocs.logger.error "#{self.class.name} fetch token error: #{data.inspect}"
+          TencentDocsSdk.logger.error "#{self.class.name} fetch token error: #{data.inspect}"
         else
           expires_at = Time.now.to_i + data['expires_in'].to_i - 120
           redis.hmset(
@@ -50,7 +50,7 @@ module TencentDocs
       end
 
       def redis
-        TencentDocs.redis
+        TencentDocsSdk.redis
       end
 
       def expired?

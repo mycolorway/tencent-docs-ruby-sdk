@@ -2,7 +2,7 @@ require_relative 'lib/tencent_docs/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'tencent_docs-sdk'
-  spec.version       = TencentDocs::VERSION
+  spec.version       = TencentDocsSdk::VERSION
   spec.authors       = ['euxx']
   spec.email         = ['euxuuu@gmail.com']
 

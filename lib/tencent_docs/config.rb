@@ -1,6 +1,6 @@
 require 'logger'
 
-module TencentDocs
+module TencentDocsSdk
   API_BASE_URL = 'https://docs.qq.com'.freeze
 
   class << self

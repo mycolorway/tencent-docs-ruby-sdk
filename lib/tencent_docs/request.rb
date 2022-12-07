@@ -1,11 +1,11 @@
 require 'http'
 
-module TencentDocs
+module TencentDocsSdk
   class Request
     attr_reader :ssl_context, :http
 
     def initialize(skip_verify_ssl = true)
-      @http = HTTP.timeout(**TencentDocs.http_timeout_options)
+      @http = HTTP.timeout(**TencentDocsSdk.http_timeout_options)
       @ssl_context = OpenSSL::SSL::SSLContext.new
       @ssl_context.ssl_version = :TLSv1
       @ssl_context.verify_mode = OpenSSL::SSL::VERIFY_NONE if skip_verify_ssl
@@ -27,7 +27,7 @@ module TencentDocs
 
     def post(path, post_body, post_header = {})
       request(path, post_header) do |url, header|
-        TencentDocs.logger.info "payload: #{post_body}"
+        TencentDocsSdk.logger.info "payload: #{post_body}"
         params = header.delete(:params)
         http.headers(header).post(url, params: params, json: post_body, ssl_context: ssl_context)
       end
@@ -35,7 +35,7 @@ module TencentDocs
 
     def patch(path, patch_body, patch_header = {})
       request(path, patch_header) do |url, header|
-        TencentDocs.logger.info "payload: #{patch_body}"
+        TencentDocsSdk.logger.info "payload: #{patch_body}"
         params = header.delete(:params)
         http.headers(header).patch(url, params: params, json: patch_body, ssl_context: ssl_context)
       end
@@ -61,12 +61,12 @@ module TencentDocs
     def request(path, header={}, &_block)
       base_url = API_BASE_URL
       url = URI.join(base_url, path)
-      TencentDocs.logger.info "request url(#{url}) with headers: #{header}"
+      TencentDocsSdk.logger.info "request url(#{url}) with headers: #{header}"
       as = header.delete(:as)
       header['Accept'] = 'application/json'
       response = yield(url, header)
       unless response.status.success?
-        TencentDocs.logger.error "request #{url} happen error: #{response.body}"
+        TencentDocsSdk.logger.error "request #{url} happen error: #{response.body}"
         raise ResponseError.new(response.status, response.body)
       end
       handle_response(response, as || :json)
@@ -91,10 +91,10 @@ module TencentDocs
     end
 
     def parse_as_json(body)
-      TencentDocs.logger.info "response body: #{body}"
+      TencentDocsSdk.logger.info "response body: #{body}"
       data = JSON.parse body.to_s
       result = Result.new(data)
-      raise ::TencentDocs::AccessTokenExpiredError if [99991663, 99991664].include?(result.code)
+      raise ::TencentDocsSdk::AccessTokenExpiredError if [37019].include?(result.code)
       result
     end
 

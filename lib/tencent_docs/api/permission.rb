@@ -1,4 +1,4 @@
-module TencentDocs
+module TencentDocsSdk
   module Api
     module Permission
       # https://docs.qq.com/open/document/app/openapi/v2/file/files/access.html

@@ -1,6 +1,6 @@
 require 'tencent_docs/request'
 
-module TencentDocs
+module TencentDocsSdk
   module Client
     class Base
       attr_reader :options
@@ -10,7 +10,7 @@ module TencentDocs
       end
 
       def request
-        @request ||= TencentDocs::Request.new(false)
+        @request ||= TencentDocsSdk::Request.new(false)
       end
 
       def get(path, headers = {})
@@ -52,7 +52,7 @@ module TencentDocs
       def init_attrs(*keys)
         keys.each do |key|
           value = options[key]
-          raise TencentDocs::MissingParameterException, "missing parameter: #{key}" if value.nil?
+          raise TencentDocsSdk::MissingParameterException, "missing parameter: #{key}" if value.nil?
 
           instance_variable_set("@#{key}", value)
         end
@@ -66,7 +66,7 @@ module TencentDocs
         params = headers[:params] || {}
         headers[:params] = params
         yield default_headers.merge(headers)
-      rescue TencentDocs::AccessTokenExpiredError
+      rescue TencentDocsSdk::AccessTokenExpiredError
         token_store.fetch_token
         retry unless (tries -= 1).zero?
       end
@@ -84,7 +84,7 @@ module TencentDocs
           class_eval <<-CODE, __FILE__, __LINE__ + 1
             def #{name.to_s.gsub('/', '_')}
               @#{name.to_s.gsub('/', '_')} ||= Class.new(SimpleDelegator) do
-                include ::TencentDocs::Api::#{name.to_s.classify}
+                include ::TencentDocsSdk::Api::#{name.to_s.classify}
               end.new(self)
             end
           CODE

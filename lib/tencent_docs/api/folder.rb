@@ -1,4 +1,4 @@
-module TencentDocs
+module TencentDocsSdk
   module Api
     module Folder
       # https://docs.qq.com/open/document/app/openapi/v2/file/folders/list.html
