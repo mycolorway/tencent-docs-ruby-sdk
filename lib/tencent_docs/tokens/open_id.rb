@@ -4,7 +4,7 @@ module TencentDocsSdk
   module Tokens
     class OpenId < Base
       def redis_key
-        @redis_key ||= Digest::MD5.hexdigest "#{self.class.name}_#{client.user_id}"
+        @redis_key ||= Digest::MD5.hexdigest "#{self.class.name}_#{client.user_id}_#{client.nick_name}_#{client.avatar}"
       end
 
       def fetch_token
