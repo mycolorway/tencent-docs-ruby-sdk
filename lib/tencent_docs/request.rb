@@ -7,7 +7,6 @@ module TencentDocsSdk
     def initialize(skip_verify_ssl = true)
       @http = HTTP.timeout(**TencentDocsSdk.http_timeout_options)
       @ssl_context = OpenSSL::SSL::SSLContext.new
-      @ssl_context.ssl_version = :TLSv1
       @ssl_context.verify_mode = OpenSSL::SSL::VERIFY_NONE if skip_verify_ssl
     end
 
